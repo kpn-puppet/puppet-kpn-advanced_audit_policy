@@ -1,0 +1,6 @@
+2018-05-04 Release 1.0.2
+- code checked with Rubocop
+- release to Puppet Forge
+
+2017-04-07 Release 1.0.0
+- initial commit

@@ -186,6 +186,7 @@ This module works on:
 * Windows 2008 R2
 * Windows 2012 R2
 * Windows 2016
+* Windows 2019
 
 ## Development
 You can contribute by submitting issues, providing feedback and joining the discussions.

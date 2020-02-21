@@ -190,7 +190,7 @@ This module works on:
 ## Development
 You can contribute by submitting issues, providing feedback and joining the discussions.
 
-Go to: `https://github.com/kpn-puppet/puppet-kpn-advanced_audit_policy`
+Go to: `https://github.com/radsec/puppet-advanced_audit_policy`
 
 If you want to fix bugs, add new features etc:
 - Fork it

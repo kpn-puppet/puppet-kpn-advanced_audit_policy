@@ -183,9 +183,17 @@ This module can manages the following settings, future settings can be added to 
 This is where you list OS compatibility, version compatibility, etc.
 
 This module works on:
-* Windows 2008 R2
-* Windows 2012 R2
-* Windows 2016
+
+# Desktop OSes
+* Windows 7
+* Windows 8/8.1
+* Windows 10
+
+# Server OSes
+* Windows 2008/2008 R2
+* Windows Server 2012/2012 R2
+* Windows Server 2016
+* Windows Server 2019
 
 ## Development
 You can contribute by submitting issues, providing feedback and joining the discussions.

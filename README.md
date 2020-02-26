@@ -52,7 +52,7 @@ Values: Any valid advanced auditing subcategory.
 
 Description: This String contains the auditing policy that will be managed with this module. Refer to the list of settings below.
 
-#### ensure
+#### ensure (optional)
 Type: 'Enum'
 
 Default: `'present'`
@@ -61,14 +61,14 @@ Values: `'present'` or `'absent'`
 
 Description: Defines whether this subsetting should be absent or present in the advanced audit settings configuration csv.
 
-#### success
+#### success (optional)
 Type: `Enum`
 
 Default: `'disable'`
 
 Description: Enables or disables the audit settings on success.
 
-#### failure
+#### failure (optional)
 Type: `Enum`
 
 Default: `'disable'`

@@ -26,7 +26,7 @@ This module uses `auditpol.exe` to configure the advanced auditing policies on W
 ### Setup Requirements
 
 This module requires:
-- [puppetlabs-stdlib](https://github.com/puppetlabs/puppetlabs-stdlib) (version requirement: >= 4.6.0 <5.0.0)
+- [puppetlabs-stdlib](https://github.com/puppetlabs/puppetlabs-stdlib) (version requirement: >= 4.6.0)
 
 ### What advanced_audit_policy affects
 - Advanced auditing policies.

@@ -12,21 +12,21 @@ Puppet::Type.newtype(:audit_policy) do
 
   newproperty(:success) do
     desc 'Whether auditing is enabled on success or not'
-    defaultto :nil
+    #defaultto :nil
     newvalues(:enable, :disable)
-    validate do |value|
-      raise 'Success parameter must be provided' unless value != :nil
-      raise "expected values :enable or :disable. got: #{value}" unless value.to_s =~ %r{^(enable|disable)$}
-    end
+    #validate do |value|
+    #  raise 'Success parameter must be provided' unless value != :nil
+    #  raise "expected values :enable or :disable. got: #{value}" unless value.to_s =~ %r{^(enable|disable)$}
+    #end
   end
 
   newproperty(:failure) do
     desc 'Whether auditing is enabled on failure or not'
-    defaultto :nil
+    #defaultto :nil
     newvalues(:enable, :disable)
-    validate do |value|
-      raise 'Failure parameter must be provided' unless value != :nil
-      raise "expected values :enable or :disable. got: #{value}" unless value.to_s =~ %r{^(enable|disable)$}
-    end
+    #validate do |value|
+    #  raise 'Failure parameter must be provided' unless value != :nil
+    #  raise "expected values :enable or :disable. got: #{value}" unless value.to_s =~ %r{^(enable|disable)$}
+    #end
   end
 end

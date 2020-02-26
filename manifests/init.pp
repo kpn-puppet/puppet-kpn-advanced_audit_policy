@@ -6,7 +6,7 @@ define advanced_audit_policy (
   Enum['enable', 'disable'] $failure = 'disable',
 ) {
 
-  unless "${facts['os']['family']} ${facts['os']['release']['major']}" =~ /(w|W)indows (2008( R2)?|2012( R2)?|2016|2019|10|8|8.1|7)/ {
+  unless "${facts['os']['family']} ${facts['os']['release']['major']}" =~ /(w|W)indows (2008( R2)?|2012( R2)?|2016|2019|10|8.1|8|7)/ {
     fail("Module ${module_name} is not supported on ${facts['os']['family']}.")
   }
 
@@ -30,11 +30,20 @@ define advanced_audit_policy (
   }
 
   # Set actual auditing policies
-  if ($ensure == 'present') or (defined($policy)) {
+  if ($ensure == 'present') or (defined($policy) and !($ensure =='absent')) {
     # Activate the setting using auditpol.exe
     audit_policy { $auditpol_name:
       success => $success,
       failure => $failure,
+    }
+
+  }
+
+  if ($ensure == 'absent'){
+    # De-activate the setting using auditpol.exe
+    audit_policy { $auditpol_name:
+      success => 'disable',
+      failure => 'disable',
     }
   }
 
@@ -48,8 +57,17 @@ define advanced_audit_policy (
 
   $policy_guid = $guid_lookup_hash[$policy]
 
-  if($ensure == 'present') or (defined($policy)){
+  if($ensure == 'present') or (defined($policy) and !($ensure =='absent')){
   
+    file_line { "audit_csv_line_${policy_guid}":
+      ensure => $ensure,
+      path   => $audit_csv_file_path,
+      line   => ",System,${policy},${policy_guid},${setting_csv[1]},,${setting_csv[0]}",
+      match  => "^,System,${policy},${policy_guid},",
+    }
+  }
+
+  if($ensure == 'absent'){
     file_line { "audit_csv_line_${policy_guid}":
       ensure => $ensure,
       path   => $audit_csv_file_path,

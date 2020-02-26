@@ -6,7 +6,7 @@ define advanced_audit_policy (
   Enum['enable', 'disable'] $failure = 'disable',
 ) {
 
-  unless "${facts['os']['family']} ${facts['os']['release']['major']}" =~ /(w|W)indows (2008( R2)?|2012( R2)?|2016|2019|10)/ {
+  unless "${facts['os']['family']} ${facts['os']['release']['major']}" =~ /(w|W)indows (2008( R2)?|2012( R2)?|2016|10)/ {
     fail("Module ${module_name} is not supported on ${facts['os']['family']}.")
   }
 
@@ -25,11 +25,12 @@ define advanced_audit_policy (
     'Audit Central Access Policy Staging' => 'Central Policy Staging',
     'Audit Token Right Adjusted'          => 'Token Right Adjusted Events',
     'Audit PNP Activity'                  => 'Plug and Play Events',
+    'Audit Policy Change'                 =>  'Audit Policy Change',
     default                               => regsubst($policy, '^Audit\s', ''),
   }
 
   # Set actual auditing policies
-  if $ensure == 'present' {
+  if ($ensure == 'present') or (defined($policy)) {
     # Activate the setting using auditpol.exe
     audit_policy { $auditpol_name:
       success => $success,
@@ -47,11 +48,14 @@ define advanced_audit_policy (
 
   $policy_guid = $guid_lookup_hash[$policy]
 
-  file_line { "audit_csv_line_${policy_guid}":
-    ensure => $ensure,
-    path   => $audit_csv_file_path,
-    line   => ",System,${policy},${policy_guid},${setting_csv[1]},,${setting_csv[0]}",
-    match  => "^,System,${policy},${policy_guid},",
+  if($ensure == 'present') or (defined($policy)){
+  
+    file_line { "audit_csv_line_${policy_guid}":
+      ensure => $ensure,
+      path   => $audit_csv_file_path,
+      line   => ",System,${policy},${policy_guid},${setting_csv[1]},,${setting_csv[0]}",
+      match  => "^,System,${policy},${policy_guid},",
+    }
   }
 
 }

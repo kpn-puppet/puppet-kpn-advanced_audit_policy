@@ -6,6 +6,7 @@
 2. [Module Description](#module-description)
 3. [Setup](#setup)
     * [Setup requirements](#setup-requirements)
+    * [GUID Lookup Hash Generation] (#GUID-Lookup-Hash-Generation)
     * [What advanced_audit_policy affects](#what-advanced_audit_policy-affects)
     * [Beginning with advanced_audit_policy](#beginning-with-advanced_audit_policy)
 4. [Usage](#usage)
@@ -27,6 +28,12 @@ This module uses `auditpol.exe` to configure the advanced auditing policies on W
 
 This module requires:
 - [puppetlabs-stdlib](https://github.com/puppetlabs/puppetlabs-stdlib) (version requirement: >= 4.6.0)
+
+### GUID Lookup Hash Generation
+
+The Ruby module: guid_lookup_hash_generation.rb
+
+This Ruby script can be used to generate the $guid_lookup_hash within the config.pp file found under manifest. This hash is used to map the advanced audit GUID policies back to the proper advanced audit subcategory name.
 
 ### What advanced_audit_policy affects
 - Advanced auditing policies.

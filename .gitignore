@@ -21,3 +21,8 @@
 /convert_report.txt
 .DS_Store
 .travis
+*.rb eol=lf
+*.erb eol=lf
+*.pp eol=lf
+*.sh eol=lf
+*.epp eol=lf

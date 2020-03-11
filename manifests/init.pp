@@ -58,7 +58,7 @@ define advanced_audit_policy (
   $policy_guid = $guid_lookup_hash[$policy]
 
   if($ensure == 'present') or (defined($policy) and !($ensure =='absent')){
-  
+
     file_line { "audit_csv_line_${policy_guid}":
       ensure => $ensure,
       path   => $audit_csv_file_path,

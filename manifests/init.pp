@@ -69,10 +69,10 @@ define advanced_audit_policy (
 
   if($ensure == 'absent'){
     file_line { "audit_csv_line_${policy_guid}":
-      ensure => $ensure,
-      path   => $audit_csv_file_path,
-      line   => ",System,${policy},${policy_guid},${setting_csv[1]},,${setting_csv[0]}",
-      match  => "^,System,${policy},${policy_guid},",
+      ensure            => $ensure,
+      path              => $audit_csv_file_path,
+      match             => "^,System,${policy},${policy_guid},",
+      match_for_absense => true,
     }
   }
 

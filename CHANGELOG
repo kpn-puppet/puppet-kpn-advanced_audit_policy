@@ -1,3 +1,11 @@
+2020-03-11 Release 3.11.2020-A
+- Updated to match removal of audit policies
+
+2020-02-27 Release 2.27.2020-A
+- Updated to run on newer Windows Operating Systems
+- GUID creation script included to update GUID audit mapping policies
+- re-release to Puppet Forge
+
 2018-05-04 Release 1.0.2
 - code checked with Rubocop
 - release to Puppet Forge

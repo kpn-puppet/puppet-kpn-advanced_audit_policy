@@ -6,7 +6,7 @@
 2. [Module Description](#module-description)
 3. [Setup](#setup)
     * [Setup requirements](#setup-requirements)
-    * [GUID Lookup Hash Generation] (#guid-lookup-hash-generation)
+    * [GUID Lookup Hash Generation](#guid-lookup-hash-generation)
     * [What advanced_audit_policy affects](#what-advanced_audit_policy-affects)
     * [Beginning with advanced_audit_policy](#beginning-with-advanced_audit_policy)
 4. [Usage](#usage)

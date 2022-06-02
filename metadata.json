@@ -1,6 +1,6 @@
 {
   "name": "kpn-advanced_audit_policy",
-  "version": "1.0.2",
+  "version": "1.2.1",
   "author": "kpn",
   "summary": "This module sets Advanced Auditing Policy settings on Windows",
   "license": "Apache-2.0",
@@ -20,7 +20,8 @@
         "2008 R2",
         "2012 R2",
         "2016",
-        "2019"
+        "2019",
+        "2022"
       ]
     }
   ],

@@ -8,7 +8,6 @@ class advanced_audit_policy::config {
   $audit_csv_folder_path.split('/').reduce($facts['os']['windows']['system32']) |$memo, $value| {
     file { "${memo}/${value}":
       ensure => 'directory',
-      path   => "${memo}/${value}",
     }
     "${memo}/${value}"
   }

@@ -17,6 +17,8 @@
     {
       "operatingsystem": "windows",
       "operatingsystemrelease": [
+        "10",
+        "11",
         "2008 R2",
         "2012 R2",
         "2016",

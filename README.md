@@ -188,6 +188,8 @@ This module works on:
 * Windows 2016
 * Windows 2019
 * Windows 2022
+* Windows 10
+* Windows 11
 
 ## Development
 You can contribute by submitting issues, providing feedback and joining the discussions.

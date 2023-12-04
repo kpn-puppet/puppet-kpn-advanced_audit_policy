@@ -26,6 +26,8 @@ describe 'advanced_audit_policy' do
 
   context 'with supported operating system' do
     [
+      { os: { family: 'windows', release: { major: '10' }, windows: { system32: 'C:/Windows/System32' } } },
+      { os: { family: 'windows', release: { major: '11' }, windows: { system32: 'C:/Windows/System32' } } },
       { os: { family: 'windows', release: { major: '2008' }, windows: { system32: 'C:/Windows/System32' } } },
       { os: { family: 'windows', release: { major: '2008 R2' }, windows: { system32: 'C:/Windows/System32' } } },
       { os: { family: 'windows', release: { major: '2012' }, windows: { system32: 'C:/Windows/System32' } } },

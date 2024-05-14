@@ -195,12 +195,14 @@ This module works on:
 * Windows 7
 * Windows 8/8.1
 * Windows 10
+* Windows 11
 
 # Server OSes
 * Windows 2008/2008 R2
 * Windows Server 2012/2012 R2
 * Windows Server 2016
 * Windows Server 2019
+* Windows Server 2022
 
 ## Development
 You can contribute by submitting issues, providing feedback and joining the discussions.

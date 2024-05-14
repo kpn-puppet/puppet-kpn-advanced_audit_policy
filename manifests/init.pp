@@ -6,7 +6,7 @@ define advanced_audit_policy (
   Enum['enable', 'disable'] $failure = 'disable',
 ) {
 
-  unless "${facts['os']['family']} ${facts['os']['release']['major']}" =~ /(w|W)indows (2008( R2)?|2012( R2)?|2016|2019|10|8.1|8|7)/ {
+  unless "${facts['os']['family']} ${facts['os']['release']['major']}" =~ /(w|W)indows (2008( R2)?|2012( R2)?|2016|2019|2022|11|10|8.1|8|7)/ {
     fail("Module ${module_name} is not supported on ${facts['os']['family']}.")
   }
 

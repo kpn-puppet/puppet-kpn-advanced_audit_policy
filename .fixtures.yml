@@ -1,7 +1,5 @@
 fixtures:
   repositories:
-    stdlib:
-      repo: 'https://github.com/puppetlabs/puppetlabs-stdlib.git'
-      ref: 'v7.1.0'
+    stdlib: 'https://github.com/puppetlabs/puppetlabs-stdlib.git'
   symlinks:
     advanced_audit_policy: '#{source_dir}'

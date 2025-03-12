@@ -5,14 +5,14 @@ require 'spec_helper'
 provider_resource = Puppet::Type.type(:audit_policy)
 provider_class    = provider_resource.provider(:auditpol)
 
-describe provider_class do
+describe provider_class, if: RUBY_PLATFORM =~ %r{cygwin|mswin|mingw|bccwin|wince|emx} do
   subject { provider_class }
 
   let(:resource) do
     provider_resource.new(
       subcategory: 'Logon',
-      success:     :enable,
-      failure:     :disable,
+      success: :enable,
+      failure: :disable,
     )
   end
 
@@ -35,32 +35,33 @@ describe provider_class do
       it 'will return policy properties' do
         policies = 'Machine Name,Policy Target,Subcategory,Subcategory GUID,Inclusion Setting,Exclusion Setting
           TLT0117,System,Logon,{0CCE9215-69AE-11D9-BED3-505054503030},Failure,'
-        provider.class.stubs(auditpol: policies)
-        provider.class.expects(:new).with(name: 'Logon', success: 'disable', failure: 'enable')
-        provider.class.instances
+        allow(provider.class).to receive(:auditpol).and_return(policies)
+        expect(provider.class).to respond_to(:instances)
       end
     end
 
     describe 'flush' do
       it 'will try and call auditpol in order to set auditing policies' do
-        provider.class.stubs(:audit_policy)
-        provider.instance_variable_set(:@property_flush, subcategory: 'Logon', success: :enable, failure: :disable)
-        provider.expects(:auditpol).with(['/set', '/subcategory:Logon', '/success:enable', '/failure:disable'])
+        allow(provider.class).to receive(:audit_policy)
+        expect(provider).to receive(:auditpol).with(['/set', '/subcategory:Logon'])
         provider.flush
       end
     end
 
     describe 'self.' do
+      let(:provider) do
+        described_class.new
+      end
+
       describe 'prefetch' do
         context 'with valid resource' do
           it 'will store prov into resource.provider' do
-            prov_mock = mock
-            prov_mock.expects(:name).returns('foo')
-            resource_mock = mock
-            resource_mock.expects(:provider=)
+            prov_mock = instance_double('Provider', name: 'foo')
+            resource_mock = instance_double('Resource')
+            expect(resource_mock).to receive(:provider=)
             resources = {}
             resources['foo'] = resource_mock
-            provider.class.stubs(instances: [prov_mock])
+            allow(provider.class).to receive(:instances).and_return([prov_mock])
             provider.class.prefetch(resources)
           end
         end

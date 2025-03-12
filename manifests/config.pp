@@ -1,6 +1,6 @@
 # Define advanced_audit_policy
+#
 class advanced_audit_policy::config {
-
   $audit_csv_folder_path = 'GroupPolicy/Machine/Microsoft/Windows NT/Audit'
   $audit_csv_file_path   = "${facts['os']['windows']['system32']}/${audit_csv_folder_path}/audit.csv"
 
@@ -13,7 +13,7 @@ class advanced_audit_policy::config {
   }
 
   # Ensure audit.csv exists and contains at least a header
-  file {$audit_csv_file_path:
+  file { $audit_csv_file_path:
     ensure => 'file',
   }
 
@@ -87,5 +87,4 @@ class advanced_audit_policy::config {
     'Audit Security System Extension'              => '{0cce9211-69ae-11d9-bed3-505054503030}',
     'Audit System Integrity'                       => '{0cce9212-69ae-11d9-bed3-505054503030}',
   }
-
 }

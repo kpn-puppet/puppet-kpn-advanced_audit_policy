@@ -11,7 +11,7 @@ define advanced_audit_policy (
   Enum['enable', 'disable'] $success = 'disable',
   Enum['enable', 'disable'] $failure = 'disable',
 ) {
-  if "${facts['os']['name']} ${facts['os']['release']['major']}" !~ /(w|W)indows (2008( R2)?|2012( R2)?|2016|10|2019|2022)/ {
+  if "${facts['os']['name']} ${facts['os']['release']['major']}" !~ /(w|W)indows (2008( R2)?|2012( R2)?|2016|10|2019|2022|2025)/ {
     fail("Module ${module_name} is not supported on ${facts['os']['name']} ${facts['os']['release']['major']}.")
   }
 

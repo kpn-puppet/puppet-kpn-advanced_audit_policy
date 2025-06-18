@@ -188,6 +188,7 @@ This module works on:
 * Windows 2016
 * Windows 2019
 * Windows 2022
+* Windows 2025
 * Windows 10
 * Windows 11
 

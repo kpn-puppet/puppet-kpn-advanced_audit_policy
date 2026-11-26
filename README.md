@@ -179,6 +179,18 @@ This module can manages the following settings, future settings can be added to 
 
 - auditpolicy
 
+The `audit_policy` type accepts an optional `guid` parameter (for example
+`'{0cce9215-69ae-11d9-bed3-505054503030}'`). The `advanced_audit_policy`
+defined type always sets it. When `guid` is set, the provider passes the GUID
+to `auditpol.exe /set` and matches existing state by GUID, so policies apply on
+hosts with a non-English system locale, where `auditpol.exe` does not accept
+English subcategory names. Current state is read from `auditpol.exe /backup`,
+whose numeric `Setting Value` column does not depend on the locale.
+If two `audit_policy` resources resolve to the same subcategory, by GUID or
+by a name that exactly matches the one `auditpol.exe` reports, the run fails
+for every `audit_policy` resource rather than letting one silently overwrite
+the other.
+
 ## Limitations
 This is where you list OS compatibility, version compatibility, etc.
 

@@ -66,6 +66,7 @@ describe 'advanced_audit_policy' do
         it { is_expected.to contain_file_line('audit_csv_file_header').with('path' => 'C:\Windows\system32/GroupPolicy/Machine/Microsoft/Windows NT/Audit/audit.csv') }
         it { is_expected.to contain_file_line('audit_csv_file_header').with('line' => 'Machine Name,Policy Target,Subcategory,Subcategory GUID,Inclusion Setting,Exclusion Setting,Setting Value') }
         it { is_expected.to contain_audit_policy('Logon').with('success' => 'disable', 'failure' => 'disable') }
+        it { is_expected.to contain_audit_policy('Logon').with('guid' => '{0cce9215-69ae-11d9-bed3-505054503030}') }
         it { is_expected.to contain_file_line('audit_csv_line_{0cce9215-69ae-11d9-bed3-505054503030}').with('ensure' => 'present') }
         it { is_expected.to contain_file_line('audit_csv_line_{0cce9215-69ae-11d9-bed3-505054503030}').with('path' => 'C:\Windows\system32/GroupPolicy/Machine/Microsoft/Windows NT/Audit/audit.csv') }
         it { is_expected.to contain_file_line('audit_csv_line_{0cce9215-69ae-11d9-bed3-505054503030}').with('line' => ',System,Audit Logon,{0cce9215-69ae-11d9-bed3-505054503030},No Auditing,,0') }
@@ -84,6 +85,7 @@ describe 'advanced_audit_policy' do
 
         it { is_expected.to contain_audit_policy('Central Policy Staging').with('success' => 'enable') }
         it { is_expected.to contain_audit_policy('Central Policy Staging').with('failure' => 'disable') }
+        it { is_expected.to contain_audit_policy('Central Policy Staging').with('guid' => '{0cce9246-69ae-11d9-bed3-505054503030}') }
         it { is_expected.to contain_file_line('audit_csv_line_{0cce9246-69ae-11d9-bed3-505054503030}').with('ensure' => 'present') }
         it { is_expected.to contain_file_line('audit_csv_line_{0cce9246-69ae-11d9-bed3-505054503030}').with('path' => 'C:\Windows\system32/GroupPolicy/Machine/Microsoft/Windows NT/Audit/audit.csv') }
         it { is_expected.to contain_file_line('audit_csv_line_{0cce9246-69ae-11d9-bed3-505054503030}').with('line' => ',System,Audit Central Access Policy Staging,{0cce9246-69ae-11d9-bed3-505054503030},Success,,1') }

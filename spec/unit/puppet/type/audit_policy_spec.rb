@@ -72,4 +72,26 @@ describe type_class do
       expect { type_class.new(params) }.to raise_error(Puppet::Error, %r{expected values :enable or :disable. got: illegal})
     end
   end
+
+  context 'with a guid' do
+    it 'accepts and downcases a braced GUID' do
+      resource = type_class.new(subcategory: 'Logon', guid: '{0CCE9215-69AE-11D9-BED3-505054503030}', success: :enable, failure: :disable)
+      expect(resource[:guid]).to eq('{0cce9215-69ae-11d9-bed3-505054503030}')
+    end
+
+    it 'is optional' do
+      resource = type_class.new(subcategory: 'Logon', success: :enable, failure: :disable)
+      expect(resource[:guid]).to be_nil
+    end
+
+    it 'rejects a GUID without braces' do
+      params = { subcategory: 'Logon', guid: '0cce9215-69ae-11d9-bed3-505054503030', success: :enable, failure: :disable }
+      expect { type_class.new(params) }.to raise_error(Puppet::Error, %r{Guid should be of the form})
+    end
+
+    it 'rejects a non-string GUID' do
+      params = { subcategory: 'Logon', guid: 42, success: :enable, failure: :disable }
+      expect { type_class.new(params) }.to raise_error(Puppet::Error, %r{Guid should be a String})
+    end
+  end
 end

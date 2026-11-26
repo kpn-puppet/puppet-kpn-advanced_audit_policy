@@ -25,7 +25,9 @@ define advanced_audit_policy (
     fail("'${policy}' is not a known audit policy, must be one of ${guid_lookup_hash.keys.join(', ')}")
   }
 
-  # Some settings are named different in auditpol.csv/gpedit.msc vs auditpol.exe /category:* /r
+  # Some settings are named differently in audit.csv/gpedit.msc than in
+  # auditpol.exe output. This name is the audit_policy resource title; the
+  # provider only matches state by it when no GUID is set.
   $auditpol_name = $policy ? {
     'Audit Central Access Policy Staging' => 'Central Policy Staging',
     'Audit Token Right Adjusted'          => 'Token Right Adjusted Events',
@@ -33,10 +35,15 @@ define advanced_audit_policy (
     default                               => regsubst($policy, '^Audit\s', ''),
   }
 
+  $policy_guid = $guid_lookup_hash[$policy]
+
   # Set actual auditing policies
   if $ensure == 'present' {
-    # Activate the setting using auditpol.exe
+    # Activate the setting using auditpol.exe. The GUID is passed because
+    # auditpol.exe rejects English subcategory names on hosts with a non-English
+    # system locale.
     audit_policy { $auditpol_name:
+      guid    => $policy_guid,
       success => $success,
       failure => $failure,
     }
@@ -49,8 +56,6 @@ define advanced_audit_policy (
     'disable_enable'  => ['2', 'Failure'],
     'enable_enable'   => ['3', 'Success and Failure'],
   }
-
-  $policy_guid = $guid_lookup_hash[$policy]
 
   file_line { "audit_csv_line_${policy_guid}":
     ensure            => $ensure,
